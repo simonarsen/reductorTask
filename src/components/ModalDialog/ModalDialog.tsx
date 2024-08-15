@@ -1,10 +1,10 @@
 import {
   Box,
   Button,
-  Dialog,
   DialogContent,
   DialogTitle,
   Divider,
+  Modal,
   TextField,
   Typography,
 } from "@mui/material";
@@ -34,23 +34,34 @@ const ModalDialog: FC<ModalDialogProps> = ({
   handleClick,
 }) => {
   const isDelete = modalText === "Delete";
+  const isAdd = modalText === "Add";
 
   return (
-    <Box>
-      <Dialog open={isOpenModal} sx={{ width: "100%" }}>
+    <Modal
+      open={isOpenModal}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
+    >
+      <Box sx={{ minWidth: "500px", background: "white" }}>
         <DialogTitle>{modalText}</DialogTitle>
         <DialogContent>
           {!isDelete ? (
-            <form action="">
-              <TextField
-                label="Node Name"
-                fullWidth
-                value={value}
-                onChange={(e) => handleSetValue(e)}
-              />
-            </form>
+            <TextField
+              label={isAdd ? "Node Name" : "New Node Name"}
+              variant="filled"
+              fullWidth
+              value={value}
+              onChange={(e) => handleSetValue(e)}
+            />
           ) : (
-            <Typography>Do you want to delete {item.name}</Typography>
+            <Typography>
+              Do you want to delete <b>{item.name}</b>
+            </Typography>
           )}
         </DialogContent>
         <Divider />
@@ -60,8 +71,8 @@ const ModalDialog: FC<ModalDialogProps> = ({
             {modalText}
           </Button>
         </Box>
-      </Dialog>
-    </Box>
+      </Box>
+    </Modal>
   );
 };
 
