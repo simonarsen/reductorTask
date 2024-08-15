@@ -46,31 +46,34 @@ const SingleItem: FC<IProps> = ({
             />
           )}
           <span>{item.name}</span>
-          {item.name === "events" ? (
-            <AddCircleOutlineIcon
-              sx={{ color: "blue", cursor: "pointer" }}
-              onClick={() => handleOpenModal && handleOpenModal(item, "Add")}
-            />
-          ) : (
-            <div className={styles.icons}>
+          {isItemOpen &&
+            (item.name === "events" ? (
               <AddCircleOutlineIcon
                 sx={{ color: "blue", cursor: "pointer" }}
                 onClick={() => handleOpenModal && handleOpenModal(item, "Add")}
               />
-              <ModeEditOutlinedIcon
-                sx={{ color: "blue", cursor: "pointer" }}
-                onClick={() =>
-                  handleOpenModal && handleOpenModal(item, "Rename")
-                }
-              />
-              <DeleteForeverIcon
-                sx={{ color: "red", cursor: "pointer" }}
-                onClick={() =>
-                  handleOpenModal && handleOpenModal(item, "Delete")
-                }
-              />
-            </div>
-          )}
+            ) : (
+              <div className={styles.icons}>
+                <AddCircleOutlineIcon
+                  sx={{ color: "blue", cursor: "pointer" }}
+                  onClick={() =>
+                    handleOpenModal && handleOpenModal(item, "Add")
+                  }
+                />
+                <ModeEditOutlinedIcon
+                  sx={{ color: "blue", cursor: "pointer" }}
+                  onClick={() =>
+                    handleOpenModal && handleOpenModal(item, "Rename")
+                  }
+                />
+                <DeleteForeverIcon
+                  sx={{ color: "red", cursor: "pointer" }}
+                  onClick={() =>
+                    handleOpenModal && handleOpenModal(item, "Delete")
+                  }
+                />
+              </div>
+            ))}
         </div>
         {item.children.length && isItemOpen ? (
           item.children.map((child) => (
