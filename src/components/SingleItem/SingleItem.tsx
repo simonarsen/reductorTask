@@ -3,28 +3,13 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { ChangeEvent, FC, useState } from "react";
-import { ItemType } from "../../types/itemType";
+import { FC, useState } from "react";
 
 import styles from "./SingleItem.module.scss";
-import { ModalTextType } from "../Layout/Layout";
 import ModalDialog from "../ModalDialog";
+import { IProps } from "../../types/propsType";
 
-interface SingleItemProps {
-  item: ItemType;
-  modalText: ModalTextType;
-  isOpenModal: boolean;
-  value: string;
-  newItem: ItemType;
-  handleOpenModal: (item: ItemType, txt: ModalTextType) => void;
-  handleSetValue: (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-  handleCloseModal: () => void;
-  handleClick: (item: ItemType) => void;
-}
-
-const SingleItem: FC<SingleItemProps> = ({
+const SingleItem: FC<IProps> = ({
   item,
   modalText,
   isOpenModal,
@@ -64,21 +49,25 @@ const SingleItem: FC<SingleItemProps> = ({
           {item.name === "events" ? (
             <AddCircleOutlineIcon
               sx={{ color: "blue", cursor: "pointer" }}
-              onClick={() => handleOpenModal(item, "Add")}
+              onClick={() => handleOpenModal && handleOpenModal(item, "Add")}
             />
           ) : (
             <div className={styles.icons}>
               <AddCircleOutlineIcon
                 sx={{ color: "blue", cursor: "pointer" }}
-                onClick={() => handleOpenModal(item, "Add")}
+                onClick={() => handleOpenModal && handleOpenModal(item, "Add")}
               />
               <ModeEditOutlinedIcon
                 sx={{ color: "blue", cursor: "pointer" }}
-                onClick={() => handleOpenModal(item, "Rename")}
+                onClick={() =>
+                  handleOpenModal && handleOpenModal(item, "Rename")
+                }
               />
               <DeleteForeverIcon
                 sx={{ color: "red", cursor: "pointer" }}
-                onClick={() => handleOpenModal(item, "Delete")}
+                onClick={() =>
+                  handleOpenModal && handleOpenModal(item, "Delete")
+                }
               />
             </div>
           )}
@@ -103,7 +92,7 @@ const SingleItem: FC<SingleItemProps> = ({
         ) : (
           <></>
         )}
-        {isOpenModal && (
+        {isOpenModal && newItem && (
           <ModalDialog
             isOpenModal={isOpenModal}
             value={value}

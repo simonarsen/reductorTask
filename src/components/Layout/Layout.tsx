@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { ItemType } from "../../types/itemType";
 import axios from "axios";
-import { api, baseURL } from "../../constants/URLs";
+import { api, baseURL } from "../../constants/api";
 import { treeName } from "../../constants/treeName";
 import styles from "./Layout.module.scss";
 import SingleItem from "../SingleItem";

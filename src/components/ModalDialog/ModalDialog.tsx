@@ -8,23 +8,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { ChangeEvent, FC } from "react";
-import { ModalTextType } from "../Layout/Layout";
-import { ItemType } from "../../types/itemType";
+import { FC } from "react";
+import { IProps } from "../../types/propsType";
 
-interface ModalDialogProps {
-  isOpenModal: boolean;
-  value: string;
-  modalText: ModalTextType;
-  item: ItemType;
-  handleSetValue: (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-  handleCloseModal: () => void;
-  handleClick: (item: ItemType) => void;
-}
-
-const ModalDialog: FC<ModalDialogProps> = ({
+const ModalDialog: FC<IProps> = ({
   value,
   isOpenModal,
   modalText,
